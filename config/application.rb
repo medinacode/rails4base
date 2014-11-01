@@ -23,6 +23,8 @@ module Rails4base
           g.javascripts false
           g.stylesheets false
           # use custom generator files if they exist
+          g.template_engine :custom
+          g.fallbacks[:custom] = :erb
           g.templates.unshift File::expand_path('../../templates', __FILE__)
       end
 

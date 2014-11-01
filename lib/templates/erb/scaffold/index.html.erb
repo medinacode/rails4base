@@ -15,23 +15,17 @@
     <table class="table table-striped">
         <thead>
         <tr>
-        <% attributes.each do |attribute| -%>
-            <% if !attribute.password_digest? -%>
-            <%%= sortable('<%= attribute.name %>', '<%= attribute.name.titleize %>') %>
-            <% end -%>
-        <% end -%>
+            <%% @list_columns.each do |column_name| -%>
+                <%%= sortable(column_name, column_name.titleize) %>
+            <%% end %>
             <th></th>
         </tr>
         </thead>
         <tbody>
         <%%= content_tag_for(:tr, @records) do |record| %>
-        <% attributes.each do |attribute| -%>
-            <% if attribute.type == :boolean -%>
-            <td><%%= '<i class="fa fa-check fa-lg success"></i>'.html_safe if record.<%= attribute.name %>? %></td>
-            <% elsif !attribute.password_digest? -%>
-            <td><%%= record.<%= attribute.name %> %></td>
-            <% end -%>
-        <% end -%>
+            <%% @list_columns.each do |column_name| %>
+                <td><%%= record.send(column_name) %></td>
+            <%% end %>
             <td class="actions text-right">
                 <ul class="list-unstyled list-inline">
                     <li><%%= link_to '<i class="fa fa-search fa-lg"></i>'.html_safe, record, class: 'btn btn-link' %></li>

@@ -8,25 +8,35 @@ class RestController < ApplicationController
         @search = params[:search] || ''
         @by = params[:by] || 'name'
         @dir = params[:dir] || 'asc'
+
         @records = model_class.all.order("#{@by} #{@dir}")
 
-        @records = @records.where("lower(name) LIKE ? OR lower(email) LIKE ? OR lower(active) LIKE ?",
-              "%#{@search.downcase}%", "%#{@search.downcase}%", "%#{@search.downcase}%") if !@search.blank?
+        ors = []
+        search_columns.each { |column_name| ors << "lower(#{column_name}) LIKE :search" }
+
+        @records = @records.where(ors.join(' OR '), { search: "%#{@search.downcase}%" }) if !@search.blank?
         @num_records = @records.count
 
         @records = @records.limit(@limit_records).offset((@page.to_i - 1) * @limit_records)
         @num_pages = (@num_records.to_f / @limit_records.to_f).ceil
 
+        @list_columns = list_columns
+
+        render 'rest/index'
     end
 
     def show
+        @show_columns = show_columns
+        render 'rest/show'
     end
 
     def new
         @record = model_class.new
+        render 'rest/new'
     end
 
     def edit
+        render 'rest/edit'
     end
 
     def create
@@ -52,7 +62,6 @@ class RestController < ApplicationController
         redirect_to :back
     end
 
-
     private
 
     def model_class
@@ -61,6 +70,33 @@ class RestController < ApplicationController
 
     def set_record
         @record = model_class.find(params[:id])
+    end
+
+    def search_columns
+        # return ['id', 'name', etc.] in child class to specify
+        column_names = model_class.column_names.dup
+        column_names.delete('id')
+        column_names.delete('password_digest')
+        column_names.delete('created_at')
+        column_names.delete('updated_at')
+        column_names
+    end
+
+    def list_columns
+        # return ['id', 'name', etc.] in child class to specify
+        column_names = model_class.column_names.dup
+        column_names.delete('id')
+        column_names.delete('password_digest')
+        column_names.delete('created_at')
+        column_names.delete('updated_at')
+        column_names
+    end
+
+    def show_columns
+        # return ['id', 'name', etc.] in child class to specify
+        column_names = model_class.column_names.dup
+        column_names.delete('password_digest')
+        column_names
     end
 
 end
