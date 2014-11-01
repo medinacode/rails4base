@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auth</title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+
+    <!-- Fonts -->
+    <%= stylesheet_link_tag '//fonts.googleapis.com/css?family=Open+Sans:400,700' %>
+    <%= stylesheet_link_tag '//fonts.googleapis.com/css?family=Montserrat:400,700' %>
+
+    <!-- jQuery Plugins -->
+    <%= javascript_include_tag '//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js' %>
+
+</head>
+<body>
+<%= render 'layouts/partials/header' %>
+<div class="container" id="page">
+    <%= yield %>
+</div>
+<%= render 'layouts/partials/footer' %>
+</body>
+</html>
