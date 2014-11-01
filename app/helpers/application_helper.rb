@@ -1,4 +1,5 @@
 module ApplicationHelper
+    include Rails.application.routes.url_helpers
 
     def sortable(field_name, field_label)
         str = '<th>'
@@ -7,6 +8,14 @@ module ApplicationHelper
                        params.merge(by: field_name, dir: @dir == 'asc' ? 'desc' : 'asc', page: 1)
         str += '</th>'
         return str.html_safe
+    end
+
+    def new_record_path
+        send("new_#{controller_name[0..-2]}_path")
+    end
+
+    def edit_record_path(record)
+        send("edit_#{controller_name[0..-2]}_path", record)
     end
 
 end

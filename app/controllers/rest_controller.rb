@@ -56,7 +56,7 @@ class RestController < ApplicationController
     private
 
     def model_class
-        Object.const_get(controller_name.capitalize[0..-2])
+        Object.const_get(controller_name.classify)
     end
 
     def set_record

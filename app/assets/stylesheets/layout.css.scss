@@ -10,7 +10,7 @@ $lighter-color: lighten($dark-color, 20%);
 
 body { font-size: 15px; }
 
-a:focus, .btn:focus, select:focus, input:focus { outline: 0; }
+a:focus, .btn:focus, select:focus, input:focus { outline: 0 !important; }
 select:-moz-focusring {
     color: transparent;
     text-shadow: 0 0 0 #000;
@@ -125,6 +125,8 @@ form.validate { margin: 20px 0; }
     .btn-primary { background-color: $lighter-color; }
 }
 
+// Buttons
+.btn-link, .btn-link:hover { text-decoration: none; }
 .btn-outline {
     display: inline-block;
     width: 50px;
