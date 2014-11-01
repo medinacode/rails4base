@@ -1,8 +1,9 @@
 <nav class="navbar navbar-inverse">
     <div class="container">
-        <a href="/" class="navbar-brand"><%= APP_NAME %></a>
+        <a href="/app/assets/javascripts" class="navbar-brand"><%= APP_NAME %></a>
         <% unless controller_name == 'login' %>
         <ul class="nav navbar-nav navbar-right">
+            <li class="active"><%= link_to 'Link', '/' %></li>
             <li<%= ' class="active"'.html_safe if controller_name == '' %>><%= link_to 'Link', '/' %></li>
         </ul>
         <% end %>

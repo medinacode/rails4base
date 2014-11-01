@@ -1,0 +1,59 @@
+<h2 class="clearfix">
+    <div class="pull-left">
+        <%%= link_to '<i class="fa fa-plus fa-2x"></i>'.html_safe, new_<%= singular_table_name %>_path, class: 'btn btn-default' %>
+    </div>
+    <span><%= plural_table_name.titleize %></span>
+    <form action='' method='get' class='form-inline search pull-right'>
+        <%%= text_field_tag :search, nil, class: 'form-control', value: @search %>
+        <%%= button_tag '<i class="fa fa-search fa-lg"></i>'.html_safe, class: 'btn btn-default', type: 'submit', name: '' %>
+    </form>
+</h2>
+
+
+<div class="row-fluid">
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+        <% attributes.each do |attribute| -%>
+            <% if !attribute.password_digest? -%>
+            <%%= sortable('<%= attribute.name %>', '<%= attribute.name.titleize %>') %>
+            <% end -%>
+        <% end -%>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <%%= content_tag_for(:tr, @records) do |record| %>
+        <% attributes.each do |attribute| -%>
+            <% if attribute.type == :boolean -%>
+            <td><%%= '<i class="fa fa-check fa-lg success"></i>'.html_safe if record.<%= attribute.name %>? %></td>
+            <% elsif !attribute.password_digest? -%>
+            <td><%%= record.<%= attribute.name %> %></td>
+            <% end -%>
+        <% end -%>
+            <td class="actions text-right">
+                <ul class="list-unstyled list-inline">
+                    <li><%%= link_to '<i class="fa fa-search fa-lg"></i>'.html_safe, record, class: 'btn btn-default' %></li>
+                    <li><%%= link_to '<i class="fa fa-pencil fa-lg"></i>'.html_safe, edit_<%= singular_table_name %>_path(record), class: 'btn btn-default' %></li>
+                    <li><%%= link_to '<i class="fa fa-trash fa-lg"></i>'.html_safe, record, method: :delete, data: { confirm: 'Are you sure you want to delete this record?' }, class: 'btn btn-default' %></li>
+                </ul>
+            </td>
+        <%% end %>
+        </tbody>
+    </table>
+
+    <div class="row-fluid">
+        <div class="pagination pull-right">
+            <div class="btn-group">
+                <%%= link_to '<i class="fa fa-chevron-left"></i>'.html_safe, params.merge(:page => @page.to_i - 1), class: @page.to_i == 1 ? 'btn btn-default disabled' : 'btn btn-default' %>
+                <%% (1..@num_pages).each do |p| %>
+                    <%%= link_to p, params.merge(:page => p), class: @page.to_i == p ? 'btn btn-primary' : 'btn btn-default' %>
+                <%% end %>
+                <%%= link_to '<i class="fa fa-chevron-right"></i>'.html_safe, params.merge(:page => @page.to_i + 1), class: @page.to_i == @num_pages.to_i || @records.count == 0 ? 'btn btn-default disabled' : 'btn btn-default' %>
+            </div>
+        </div>
+    </div>
+
+
+</div>

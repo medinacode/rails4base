@@ -13,6 +13,7 @@ module Rails4base
 
       # custom include paths
       config.autoload_paths += %W["#{config.root}/app/validators"]
+      config.autoload_paths += %W["#{config.root}/app/lib"]
 
       # don't use coffeescript in generators
       config.generators.javascript_engine :js
