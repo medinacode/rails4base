@@ -13,6 +13,15 @@
     <!-- jQuery Plugins -->
     <%= javascript_include_tag '//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js' %>
     <%= javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.2.0/bootbox.min.js' %>
+    <%= javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js' %>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            <%= "$.bootstrapGrowl('<i class=\"fa fa-info\"></i> &nbsp;#{flash[:info]}', { type: 'info' });".html_safe if flash[:info] %>
+            <%= "$.bootstrapGrowl('<i class=\"fa fa-check\"></i> &nbsp;#{flash[:success]}', { type: 'success' });".html_safe if flash[:success] %>
+            <%= "$.bootstrapGrowl('<i class=\"fa fa-times\"></i> &nbsp;#{flash[:error]}', { type: 'danger' });".html_safe if flash[:error] %>
+        })
+    </script>
 
 </head>
 <body>

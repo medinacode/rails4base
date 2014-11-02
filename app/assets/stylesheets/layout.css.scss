@@ -166,6 +166,13 @@ form.validate { margin: 20px 0; }
     table { margin-bottom: 0; }
 }
 
+// Growl
+.bootstrap-growl {
+    width: auto;
+    min-width: 300px;
+    z-index: 2;
+}
+
 // manual clearfix
 .modal-body:before, .modal-body:after {
     content:"";

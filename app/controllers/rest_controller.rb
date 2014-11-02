@@ -22,7 +22,6 @@ class RestController < ApplicationController
 
         @list_columns = list_columns
 
-        render 'rest/index'
     end
 
     def show
@@ -30,7 +29,7 @@ class RestController < ApplicationController
         if request.xhr?
             render 'rest/_show_ajax', :layout => false
         else
-            render 'rest/show'
+            render :show
         end
     end
 
@@ -39,7 +38,7 @@ class RestController < ApplicationController
         if request.xhr?
             render "#{controller_name}/_form_ajax", :layout => false
         else
-            render 'rest/new'
+            render :new
         end
     end
 
@@ -47,7 +46,7 @@ class RestController < ApplicationController
         if request.xhr?
             render "#{controller_name}/_form_ajax", :layout => false
         else
-            render 'rest/edit'
+            render :edit
         end
     end
 
@@ -55,26 +54,37 @@ class RestController < ApplicationController
         @record = model_class.new(record_params)
 
         if @record.save
+            flash[:success] = "#{model_name_from_record_or_class(model_class)} created"
             redirect_to users_url
         elsif request.xhr?
             render json: { errors: @record.errors.full_messages }, :status => 422
         else
-            render 'rest/new'
+            render :new
         end
     end
 
     def update
-        if @record.update(record_params)
-            redirect_to users_url
-        elsif request.xhr?
-            render json: { errors: @record.errors.full_messages }, :status => 422
+        if request.xhr?
+            if @record.update(record_params)
+                flash[:success] = "#{model_name_from_record_or_class(model_class)} updated"
+                render json: { success: true }
+            else
+                render json: { errors: @record.errors.full_messages }, :status => 422
+            end
         else
-            render 'rest/edit'
+            if @record.update(record_params)
+                flash[:success] = "#{model_name_from_record_or_class(model_class)} updated"
+                redirect_to users_url
+            else
+                render :edit
+            end
+
         end
     end
 
     def destroy
         @record.destroy
+        flash[:success] = "#{model_name_from_record_or_class(model_class)} deleted"
         redirect_to :back
     end
 
