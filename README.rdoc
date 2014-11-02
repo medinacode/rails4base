@@ -6,3 +6,13 @@ Rest Controller
 * replace search_columns in child class to control which columns are searched from index view
 * replace show_columns in child class to control which columns are shown on show view
 * extend/replace CRUD actions in child class to add functionality and/or use custom view (copy default view as base)
+
+jQuery Validation
+* using jquery validate 1.13.0
+* add :data => jquery_validation(Model.validators_on(:column)) to form field
+
+AJAX New, Edit & Show
+* add dat-action and data-controller to any link to enable AJAX functionality
+  * data: { action: 'new', controller: controller_name }
+  * data: { action: 'edit', controller: controller_name }
+  * data: { action: 'show', controller: controller_name }
