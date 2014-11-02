@@ -54,6 +54,7 @@ h2 {
     line-height: 44px;
     font-weight: normal;
     margin-top: 0;
+    margin-bottom: 15px;
 
     span { margin: 0 7px; }
     span.highlight, span.highlight a { color: $brand-info; }
@@ -117,6 +118,15 @@ form {
         .btn { width: 120px; }
         .btn-default { background-color: $lighter-color; border-color: $lighter-color; color: #fff; }
     }
+
+    label.error {
+        color: #c00;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0 0 0 7px;
+    }
+
+    input.error { border: 2px solid #c00; }
 }
 
 form.validate { margin: 20px 0; }
@@ -142,4 +152,24 @@ form.validate { margin: 20px 0; }
 
 .btn-light, .btn-light:hover { background-color: $lighter-color; border-color: $lighter-color; color: #fff; }
 .btn-done, .btn-done:hover { background-color: #eee; border-color: #eee; color: #aaa; }
+
+// Bootbox
+.modal-header { background-color: $lighter-color; color: #fff; }
+.modal-header {
+    h4.modal-title i {
+        margin: -2px 0 0 0;
+    }
+}
+.modal-footer { background-color: #eee; }
+.modal-body {
+    form { margin: 10px 0 0 0; }
+    table { margin-bottom: 0; }
+}
+
+// manual clearfix
+.modal-body:before, .modal-body:after {
+    content:"";
+    display:table;
+    clear:both;
+}
 

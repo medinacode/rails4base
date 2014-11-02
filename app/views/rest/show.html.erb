@@ -1,13 +1,6 @@
 <h2><span>Show <%= controller_name.classify %></span></h2>
 <div class="col-md-6 col-sm-12">
-    <table class="table table-striped">
-        <% @show_columns.each do |column_name| %>
-            <tr>
-                <td><%= column_name.titleize %></td>
-                <td><%= @record.send(column_name) %></td>
-            </tr>
-        <% end %>
-    </table>
+    <%= render 'show_ajax' %>
     <div class="text-right">
         <%= link_to 'Done', show_records_path, class: 'btn btn-link btn-lg' %>
     </div>

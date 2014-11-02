@@ -27,16 +27,28 @@ class RestController < ApplicationController
 
     def show
         @show_columns = show_columns
-        render 'rest/show'
+        if request.xhr?
+            render 'rest/_show_ajax', :layout => false
+        else
+            render 'rest/show'
+        end
     end
 
     def new
         @record = model_class.new
-        render 'rest/new'
+        if request.xhr?
+            render "#{controller_name}/_form_ajax", :layout => false
+        else
+            render 'rest/new'
+        end
     end
 
     def edit
-        render 'rest/edit'
+        if request.xhr?
+            render "#{controller_name}/_form_ajax", :layout => false
+        else
+            render 'rest/edit'
+        end
     end
 
     def create
@@ -44,16 +56,20 @@ class RestController < ApplicationController
 
         if @record.save
             redirect_to users_url
+        elsif request.xhr?
+            render json: { errors: @record.errors.full_messages }, :status => 422
         else
-            render :new
+            render 'rest/new'
         end
     end
 
     def update
         if @record.update(record_params)
             redirect_to users_url
+        elsif request.xhr?
+            render json: { errors: @record.errors.full_messages }, :status => 422
         else
-            render :edit
+            render 'rest/edit'
         end
     end
 

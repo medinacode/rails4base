@@ -1,0 +1,10 @@
+<div class="col-md-12 col-sm-12">
+    <table class="table table-striped">
+        <% attributes.reject(&:password_digest?).each do |attribute| -%>
+            <tr>
+                <td><%= attribute.human_name %></td>
+                <td><%%= @record.<%= attribute.name %> %></td>
+            </tr>
+        <% end -%>
+    </table>
+</div>
