@@ -17,6 +17,7 @@
             <%%= f.label :<%= attribute.column_name %>, :<%= attribute.column_name %>.to_s.titleize, class: 'col-md-4' %>
             <div class="col-md-8">
             <%%= f.password_field :<%= attribute.column_name %>,
+                :data => jquery_validation(<%= singular_table_name.camelize %>.validators_on(:<%= attribute.column_name %>)),
                 class: 'form-control input-lg'<% if attribute.password_digest? -%>, placeholder: action_name == 'edit' ? '(Enter a new password to change)' : ''<% end %> %>
             </div>
         </div>
@@ -33,14 +34,17 @@
         <% if attribute.type == :boolean -%>
             <div class="col-md-8 col-md-offset-4">
                 <div class="checkbox checkbox-circle checkbox-success input-lg">
-                    <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %> %>
+                    <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %>,
+                    :data => jquery_validation(<%= singular_table_name.camelize %>.validators_on(:<%= attribute.column_name %>)) %>
                     <%%= f.label :<%= attribute.column_name %>, :<%= attribute.column_name %>.to_s.titleize %>
                 </div>
             </div>
         <% else -%>
             <%%= f.label :<%= attribute.column_name %>, :<%= attribute.column_name %>.to_s.titleize, class: 'col-md-4' %>
             <div class="col-md-8">
-                <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %>, class: 'form-control input-lg' %>
+                <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %>,
+                :data => jquery_validation(<%= singular_table_name.camelize %>.validators_on(:<%= attribute.column_name %>)),
+                class: 'form-control input-lg' %>
             </div>
         <% end -%>
         </div>

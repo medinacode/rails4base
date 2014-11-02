@@ -41,7 +41,7 @@ module Custom # :nodoc:
 
             protected
             def available_views
-                %w(_form)
+                %w(_form_horizontal)
             end
         end
     end

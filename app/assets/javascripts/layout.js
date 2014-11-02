@@ -16,7 +16,7 @@ $(document).ready(function() {
             $.each( errorList , function(index, value) {
                 var _popover = $(value.element).popover({
                     trigger: 'manual',
-                    placement: 'right',
+                    placement: 'bottom',
                     template: '<div class="popover"><div class="arrow"></div><div class="popover-inner"><div class="popover-content"><p></p></div></div></div>',
                     html: true
                 });
