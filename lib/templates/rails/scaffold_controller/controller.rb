@@ -8,7 +8,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   def index
     @limit_records = 10
-    @page = params[:page].to_i || 1
+    @page = params[:page] ? params[:page].to_i : 1
     @search = params[:search] || ''
     @by = list_columns.include?(params[:by]) ? params[:by] : 'id'
     @dir = ['asc', 'desc'].include?(params[:dir]) ? params[:dir] : 'asc'
