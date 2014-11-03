@@ -41,7 +41,7 @@ function ajaxRecord(action, element) {
                                             window.location.reload(true);
                                         },
                                         error: function (response) {
-                                            var div = $('<div/>').addClass('alert alert-danger').append($('<h4/>').text('This record could not be saved'));
+                                            var div = $('<div/>').addClass('alert alert-danger').append($('<h4/>').text('This ' + type + ' could not be saved'));
                                             var ul = $('<ul/>');
                                             switch (response.status) {
                                                 case 422 :

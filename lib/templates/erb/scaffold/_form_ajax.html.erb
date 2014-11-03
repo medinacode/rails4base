@@ -1,5 +1,5 @@
-<div class="col-md-10 col-md-offset-1  ajax_form">
-<%%= form_for(@record, :html => { :class => 'validate' }) do |f| %>
+<div class="col-md-10 col-md-offset-1 ajax_form">
+<%%= form_for(@<%= singular_table_name %>, :html => { :class => 'validate' }) do |f| %>
     <% attributes.each do |attribute| -%>
         <% if attribute.password_digest? -%>
             <div class="form-group">

@@ -1,17 +1,6 @@
 <div class="col-md-12 col-sm-12">
-<%%= form_for(@record, :html => { :class => 'validate clearfix' }) do |f| %>
-<%% if @record.errors.any? %>
-    <div class="alert alert-danger">
-        <h4><%%= pluralize(@record.errors.count, "error") %> prevented this record from being saved</h4>
-        <ul>
-            <%% @record.errors.full_messages.each do |message| %>
-            <li><%%= message %></li>
-            <%% end %>
-        </ul>
-    </div>
-<%% end %>
-
-<% attributes.each do |attribute| -%>
+<%%= form_for(@<%= singular_table_name %>, :html => { :class => 'validate clearfix' }) do |f| %>
+  <% attributes.each do |attribute| -%>
     <% if attribute.password_digest? -%>
         <div class="form-group">
             <%%= f.label :<%= attribute.column_name %>, :<%= attribute.column_name %>.to_s.titleize %>

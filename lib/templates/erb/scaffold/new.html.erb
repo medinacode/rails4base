@@ -1,4 +1,14 @@
 <h2><span>Add a New <%= singular_table_name.titleize %></span></h2>
 <div class="col-md-8 col-md-offset-2 col-sm-12">
-    <%%= render 'form_horizontal' %>
+  <%% if @<%= singular_table_name %>.errors.any? %>
+  <div class="alert alert-danger">
+    <h4><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prevented this <%= singular_table_name %> from being saved</h4>
+    <ul>
+      <%% @<%= singular_table_name %>.errors.full_messages.each do |message| %>
+      <li><%%= message %></li>
+      <%% end %>
+    </ul>
+  </div>
+  <%% end %>
+  <%%= render 'form_horizontal' %>
 </div>

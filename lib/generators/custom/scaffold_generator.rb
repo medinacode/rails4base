@@ -41,7 +41,7 @@ module Custom # :nodoc:
 
             protected
             def available_views
-                %w(_form_horizontal _form_vertical _form_ajax)
+                %w(_form_horizontal _form_vertical _form_ajax index new edit show _show_ajax)
             end
         end
     end
