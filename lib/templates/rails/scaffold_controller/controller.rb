@@ -8,20 +8,19 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   def index
     @limit_records = 10
-    @page = params[:page] || 1
+    @page = params[:page].to_i || 1
     @search = params[:search] || ''
-    @by = params[:by] || 'name'
-    @dir = params[:dir] || 'asc'
+    @by = list_columns.include?(params[:by]) ? params[:by] : 'id'
+    @dir = ['asc', 'desc'].include?(params[:dir]) ? params[:dir] : 'asc'
 
     @<%= plural_table_name %> = <%= class_name %>.all.order("#{@by} #{@dir}")
+    @<%= plural_table_name %> = @<%= plural_table_name %>.where(search_columns.dup.map { |c| "lower(#{c}) LIKE :search" }.join(' OR '),
+              { search: "%#{@search.downcase}%" }) if !@search.blank?
 
-    ors = []
-    search_columns.each { |column_name| ors << "lower(#{column_name}) LIKE :search" }
-
-    @<%= plural_table_name %> = @<%= plural_table_name %>.where(ors.join(' OR '), { search: "%#{@search.downcase}%" }) if !@search.blank?
     @num_records = @<%= plural_table_name %>.count
 
     @<%= plural_table_name %> = @<%= plural_table_name %>.limit(@limit_records).offset((@page.to_i - 1) * @limit_records)
+
     @num_pages = (@num_records.to_f / @limit_records.to_f).ceil
 
     @list_columns = list_columns
@@ -98,9 +97,9 @@ class <%= controller_class_name %>Controller < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def <%= "#{singular_table_name}_params" %>
   <%- if attributes_names.empty? -%>
-      params[:<%= singular_table_name %>]
-      <%- else -%>
-  params.require(:<%= singular_table_name %>).permit(<%= attributes_names.map { |name| ":#{name}" }.join(', ') %>)
+    params[:<%= singular_table_name %>]
+  <%- else -%>
+    params.require(:<%= singular_table_name %>).permit(<%= attributes_names.map { |name| ":#{name}" }.join(', ') %>)
   <%- end -%>
   end
 
