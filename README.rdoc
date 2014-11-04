@@ -1,11 +1,7 @@
 == README
     
-==== Rest Controller
-* all scaffolded controllers inherit from RestController which has default actions and views for all CRUD operations
-* replace list_columns in child class to control which columns appear in index view
-* replace search_columns in child class to control which columns are searched from index view
-* replace show_columns in child class to control which columns are shown on show view
-* extend/replace CRUD actions in child class to add functionality and/or use custom view (copy default view as base)
+==== Default RSpec Tests
+Scaffold generates default model and controller tests. Copy fixture code in comments of model spec into FactoryGirl fixture and tests should immediately pass. TODO: find scaffold for fixture creation.
 
 ==== jQuery Validation
 * using jquery validate 1.13.0
