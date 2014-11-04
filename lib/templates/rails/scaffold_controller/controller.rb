@@ -54,13 +54,20 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   def create
     @<%= singular_table_name %> = <%= orm_class.build(class_name, "#{singular_table_name}_params") %>
-    if @<%= orm_instance.save %>
-      flash[:success] = '<%= human_name %> created'
-      redirect_to <%= plural_table_name %>_url
-    elsif request.xhr?
-      render json: { errors: @<%= singular_table_name %>.errors.full_messages }, :status => 422
+    if request.xhr?
+      if @<%= orm_instance.save %>
+        flash[:success] = '<%= human_name %> created'
+        render json: { success: true }
+      else
+        render json: { errors: @<%= singular_table_name %>.errors.full_messages }, :status => 422
+      end
     else
-      render :new
+      if @<%= orm_instance.save %>
+        flash[:success] = '<%= human_name %> created'
+        redirect_to <%= plural_table_name %>_url
+      else
+        render :new
+      end
     end
   end
 
