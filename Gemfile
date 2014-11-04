@@ -31,6 +31,7 @@ end
 
 group :test do
   gem 'rspec-rails'
+  gem 'accept_values_for'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'capybara'
