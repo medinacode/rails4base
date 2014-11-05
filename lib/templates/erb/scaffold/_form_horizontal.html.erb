@@ -1,47 +1,48 @@
 <div class="col-md-12 col-sm-12">
-<%%= form_for(@<%= singular_table_name %>, :html => { :class => 'validate clearfix form-horizontal' }) do |f| %>
+  <%%= form_for(@<%= singular_table_name %>, :html => { :class => 'validate clearfix form-horizontal' }) do |f| %>
 <% attributes.each do |attribute| -%>
-    <% if attribute.password_digest? -%>
-        <div class="form-group">
-            <%%= f.label :<%= attribute.column_name %>, :<%= attribute.column_name %>.to_s.titleize, class: 'col-md-4' %>
-            <div class="col-md-8">
-            <%%= f.password_field :<%= attribute.column_name %>,
-                :data => jquery_validation(<%= singular_table_name.camelize %>.validators_on(:<%= attribute.column_name %>)),
-                class: 'form-control input-lg'<% if attribute.password_digest? -%>, placeholder: action_name == 'edit' ? '(Enter a new password to change)' : ''<% end %> %>
-            </div>
-        </div>
-        <div class="form-group">
-            <%%= f.label :password_confirmation, 'Confirm Password', class: 'col-md-4' %>
-            <div class="col-md-8">
-            <%%= f.password_field :password_confirmation,
-                :data => { :'rule-equalTo' => '#<%= singular_table_name %>_password', :'msg-equalTo' => 'Password and confirm password must match' },
-                class: 'form-control input-lg' %>
-            </div>
-        </div>
-    <% else -%>
-        <div class="form-group">
-        <% if attribute.type == :boolean -%>
-            <div class="col-md-8 col-md-offset-4">
-                <div class="checkbox checkbox-circle checkbox-success input-lg">
-                    <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %>,
-                    :data => jquery_validation(<%= singular_table_name.camelize %>.validators_on(:<%= attribute.column_name %>)) %>
-                    <%%= f.label :<%= attribute.column_name %>, :<%= attribute.column_name %>.to_s.titleize %>
-                </div>
-            </div>
-        <% else -%>
-            <%%= f.label :<%= attribute.column_name %>, :<%= attribute.column_name %>.to_s.titleize, class: 'col-md-4' %>
-            <div class="col-md-8">
-                <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %>,
-                :data => jquery_validation(<%= singular_table_name.camelize %>.validators_on(:<%= attribute.column_name %>)),
-                class: 'form-control input-lg' %>
-            </div>
-        <% end -%>
-        </div>
-    <% end -%>
-<% end -%>
-    <div class="form-group button-row text-right">
-        <%%= link_to 'Cancel', <%= plural_table_name %>_url, class: 'btn btn-link btn-lg' %>
-        <%%= f.submit 'Save', class: 'btn btn-default btn-lg' %>
+<% if attribute.password_digest? -%>
+  <div class="form-group">
+    <%%= f.label :<%= attribute.column_name %>, :<%= attribute.column_name %>.to_s.titleize, class: 'col-md-5' unless action_name = 'edit' %>
+    <%%= f.label :<%= attribute.column_name %>, text_tip(:<%= attribute.column_name %>.to_s.titleize, 'Enter a new <%= attribute.column_name %>.to_s.titleize to change'), class: 'col-md-5' if action_name == 'edit' %>
+    <div class="col-md-7">
+      <%%= f.password_field :<%= attribute.column_name %>,
+              :data => jquery_validation(<%= singular_table_name.camelize %>.validators_on(:<%= attribute.column_name %>)),
+              class: 'form-control input-lg' %>
     </div>
+  </div>
+  <div class="form-group">
+    <%%= f.label :password_confirmation, 'Confirm Password', class: 'col-md-5' %>
+    <div class="col-md-7">
+      <%%= f.password_field :password_confirmation,
+              :data => { :'rule-equalTo' => '#<%= singular_table_name %>_password', :'msg-equalTo' => 'Password and confirm password must match' },
+              class: 'form-control input-lg' %>
+    </div>
+  </div>
+<% else -%>
+  <div class="form-group">
+<% if attribute.type == :boolean -%>
+    <div class="col-md-7 col-md-offset-4">
+      <div class="checkbox checkbox-circle checkbox-success input-lg">
+        <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %>,
+                :data => jquery_validation(<%= singular_table_name.camelize %>.validators_on(:<%= attribute.column_name %>)) %>
+        <%%= f.label :<%= attribute.column_name %>, :<%= attribute.column_name %>.to_s.titleize %>
+      </div>
+    </div>
+<% else -%>
+    <%%= f.label :<%= attribute.column_name %>, :<%= attribute.column_name %>.to_s.titleize, class: 'col-md-5' %>
+    <div class="col-md-7">
+      <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %>,
+              :data => jquery_validation(<%= singular_table_name.camelize %>.validators_on(:<%= attribute.column_name %>)),
+              class: 'form-control input-lg' %>
+    </div>
+<% end -%>
+  </div>
+<% end -%>
+<% end -%>
+  <div class="form-group button-row text-right">
+    <%%= link_to 'Cancel', <%= plural_table_name %>_url, class: 'btn btn-link btn-lg' %>
+    <%%= f.submit 'Save', class: 'btn btn-default btn-lg' %>
+  </div>
 <%% end %>
 </div>

@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
+
     $.validator.addMethod(
         "regex",
         function(value, element, regexp) {
