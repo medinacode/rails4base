@@ -3,8 +3,8 @@
 <% attributes.each do |attribute| -%>
 <% if attribute.password_digest? -%>
   <div class="form-group">
-    <%%= f.label :<%= attribute.column_name %>, :<%= attribute.column_name %>.to_s.titleize, class: 'col-md-5' unless action_name = 'edit' %>
-    <%%= f.label :<%= attribute.column_name %>, text_tip(:<%= attribute.column_name %>.to_s.titleize, 'Enter a new <%= attribute.column_name %>.to_s.titleize to change'), class: 'col-md-5' if action_name == 'edit' %>
+    <%%= f.label :<%= attribute.column_name %>, :<%= attribute.column_name %>.to_s.titleize, class: 'col-md-5' unless action_name == 'edit' %>
+    <%%= f.label :<%= attribute.column_name %>, text_tip(:<%= attribute.column_name %>.to_s.titleize, 'Enter a new <%= attribute.column_name %> to change'), class: 'col-md-5' if action_name == 'edit' %>
     <div class="col-md-7">
       <%%= f.password_field :<%= attribute.column_name %>,
               :data => jquery_validation(<%= singular_table_name.camelize %>.validators_on(:<%= attribute.column_name %>)),

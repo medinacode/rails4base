@@ -30,7 +30,6 @@ describe <%= class_name %> do
   it 'factory has :invalid_<%= class_name.downcase %> method' do
     expect(FactoryGirl.build(:invalid_<%= class_name.downcase %>)).to_not be nil?
   end
-
 <% attributes.each do |attribute| -%>
 
   describe ':<%= attribute.column_name %>' do
