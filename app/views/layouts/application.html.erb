@@ -17,9 +17,9 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            <%= "$.bootstrapGrowl('<i class=\"fa fa-info\"></i> &nbsp;#{flash[:info]}', { type: 'info' });".html_safe if flash[:info] %>
-            <%= "$.bootstrapGrowl('<i class=\"fa fa-check\"></i> &nbsp;#{flash[:success]}', { type: 'success' });".html_safe if flash[:success] %>
-            <%= "$.bootstrapGrowl('<i class=\"fa fa-times\"></i> &nbsp;#{flash[:error]}', { type: 'danger' });".html_safe if flash[:error] %>
+            <%= "$.bootstrapGrowl('<i class=\"fa fa-info\"></i> &nbsp;#{flash[:info]}', { type: 'info', align: 'center', allow_dismiss: false });".html_safe if flash[:info] %>
+            <%= "$.bootstrapGrowl('<i class=\"fa fa-check\"></i> &nbsp;#{flash[:success]}', { type: 'success', align: 'center', allow_dismiss: false });".html_safe if flash[:success] %>
+            <%= "$.bootstrapGrowl('<i class=\"fa fa-times\"></i> &nbsp;#{flash[:error]}', { type: 'danger', align: 'center', allow_dismiss: false });".html_safe if flash[:error] %>
         })
     </script>
 

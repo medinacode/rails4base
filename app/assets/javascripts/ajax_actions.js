@@ -32,7 +32,7 @@ function ajaxRecord(action, element) {
                                 $('.bootbox').find('div.ajax_form .alert').remove();
                                 var form = $('.bootbox').find('form.validate');
                                 if (form.valid()) {
-                                    $('[data-bb-handler="save"]').html('<i class="fa fa-refresh fa-spin"></i>');
+                                    $('[data-bb-handler="save"]').html('<i class="fa fa-refresh fa-spin"></i>').removeClass('btn-primary');
                                     $.ajax({
                                         url: form.attr('action'),
                                         type: 'POST',
@@ -55,7 +55,7 @@ function ajaxRecord(action, element) {
                                                     ul.append($('<li/>').text(response.responseText));
                                             }
                                             $('.bootbox').find('div.ajax_form').prepend(div.append(ul));
-                                            $('[data-bb-handler="save"]').text('Save');
+                                            $('[data-bb-handler="save"]').text('Save').addClass('btn-primary');
                                         }
                                     })
                                 }
