@@ -16,6 +16,8 @@ select:-moz-focusring {
   text-shadow: 0 0 0 #000;
 }
 
+span.texttip { border-bottom: 1px dashed #999; padding-bottom: 2px; }
+
 .navbar {
   text-transform: uppercase;
   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -123,9 +125,6 @@ form {
   }
 
   input.error { border: 2px solid #c00; }
-
-  label span.text-muted { font-size: 12px; line-height: 12px; }
-  label span.texttip { border-bottom: 1px dashed #999; padding-bottom: 2px; }
 }
 
 form.validate { margin: 20px 0; }
