@@ -41,7 +41,7 @@ describe <%= class_name %> do
     end
 
     it 'is invalid with too short <%= attribute.column_name %> on create' do
-      <%= class_name.downcase %> = FactoryGirl.build(:<%= class_name.downcase %>, <%= attribute.column_name %>: Faker::Internet.<%= attribute.column_name %>(6))
+      <%= class_name.downcase %> = FactoryGirl.build(:<%= class_name.downcase %>, <%= attribute.column_name %>: Faker::Internet.password(6))
       <%= class_name.downcase %>.valid?
       expect(<%= class_name.downcase %>).to_not be_valid
     end
@@ -55,7 +55,7 @@ describe <%= class_name %> do
 
     it 'is invalid with too short <%= attribute.column_name %> on update' do
       <%= class_name.downcase %> = FactoryGirl.create(:<%= class_name.downcase %>)
-      <%= class_name.downcase %>.<%= attribute.column_name %> = Faker::Internet.<%= attribute.column_name %>(7)
+      <%= class_name.downcase %>.<%= attribute.column_name %> = Faker::Internet.password(7)
       <%= class_name.downcase %>.valid?
       expect(<%= class_name.downcase %>).to_not be_valid
     end
@@ -67,7 +67,7 @@ describe <%= class_name %> do
     end
 
     subject(:<%= class_name.downcase %>) { FactoryGirl.build(:<%= class_name.downcase %>) }
-    it { should accept_values_for(:<%= attribute.column_name %>, '[CHANGE]', '[CHANGE]') }
+    it { should accept_values_for(:<%= attribute.column_name %>, Faker::Lorem.characters(10), '[CHANGE]') }
     it { should_not accept_values_for(:<%= attribute.column_name %>, nil, '', ' ') }
 <% end -%>
   end
