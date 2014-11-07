@@ -38,6 +38,7 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'selenium-webdriver'
+  gem 'rack_session_access'
 end
 
 # Use ActiveModel has_secure_password

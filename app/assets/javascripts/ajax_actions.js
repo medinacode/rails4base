@@ -19,12 +19,12 @@ function ajaxRecord(action, element) {
                 buttons: {
                     cancel: {
                         label: "Cancel",
-                        className: action == 'show' ? 'hide' : 'btn-default btn-lg pull-left',
+                        className: action == 'show' ? 'hide' : 'btn btn-default btn-lg pull-left',
                         callback: function () { $(this).modal('hide'); }
                     },
                     save: {
                         label: action == 'show' ? 'Done' : 'Save',
-                        className: "btn-primary btn-lg",
+                        className: "btn btn-success btn-lg",
                         callback: function () {
                             if (action == 'show') {
                                 $(this).modal('hide');

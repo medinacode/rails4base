@@ -22,7 +22,7 @@
 <% else -%>
   <div class="form-group">
 <% if attribute.type == :boolean -%>
-    <div class="col-md-7 col-md-offset-4">
+    <div class="col-md-7 col-md-offset-5">
       <div class="checkbox checkbox-circle checkbox-success input-lg">
         <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %>,
                 :data => jquery_validation(<%= singular_table_name.camelize %>.validators_on(:<%= attribute.column_name %>)) %>
@@ -42,7 +42,7 @@
 <% end -%>
   <div class="form-group button-row text-right">
     <%%= link_to 'Cancel', <%= plural_table_name %>_url, class: 'btn btn-link btn-lg' %>
-    <%%= f.submit 'Save', class: 'btn btn-default btn-lg' %>
+    <%%= f.submit 'Save', class: 'btn btn-success btn-lg' %>
   </div>
 <%% end %>
 </div>

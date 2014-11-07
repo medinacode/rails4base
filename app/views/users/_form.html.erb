@@ -1,0 +1,60 @@
+<div class="col-md-12 col-sm-12">
+  <%= form_for(@user, :html => { :class => 'validate clearfix form-horizontal' }) do |f| %>
+  <div class="form-group">
+    <%= f.label :full_name, :full_name.to_s.titleize, class: 'col-md-5' %>
+    <div class="col-md-7">
+      <%= f.text_field :full_name,
+              :data => jquery_validation(User.validators_on(:full_name)),
+              class: 'form-control input-lg' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :nickname, text_tip('What should we call you?', 'For example, when sending you an email'), class: 'col-md-5' %>
+    <div class="col-md-7">
+      <%= f.text_field :nickname,
+              :data => jquery_validation(User.validators_on(:nickname)),
+              class: 'form-control input-lg' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :email_address, :email_address.to_s.titleize, class: 'col-md-5' %>
+    <div class="col-md-7">
+      <%= f.text_field :email_address,
+              :data => jquery_validation(User.validators_on(:email_address)),
+              class: 'form-control input-lg' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :password, :password.to_s.titleize, class: 'col-md-5' unless action_name == 'edit' %>
+    <%= f.label :password, text_tip(:password.to_s.titleize, 'Enter a new password to change'), class: 'col-md-5' if action_name == 'edit' %>
+    <div class="col-md-7">
+      <%= f.password_field :password,
+              :data => jquery_validation(User.validators_on(:password)),
+              class: 'form-control input-lg' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :password_confirmation, 'Confirm Password', class: 'col-md-5' %>
+    <div class="col-md-7">
+      <%= f.password_field :password_confirmation,
+              :data => { :'rule-equalTo' => '#user_password', :'msg-equalTo' => 'Password and confirm password must match' },
+              class: 'form-control input-lg' %>
+    </div>
+  </div>
+  <% if current_user.admin? %>
+  <div class="form-group">
+    <div class="col-md-7 col-md-offset-5">
+      <div class="checkbox checkbox-circle checkbox-success input-lg">
+        <%= f.check_box :admin,
+                :data => jquery_validation(User.validators_on(:admin)) %>
+        <%= f.label :admin, :admin.to_s.titleize %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  <div class="form-group button-row text-right">
+    <%= link_to 'Cancel', current_user.admin? ? users_url : :back, class: 'btn btn-link btn-lg' %>
+    <%= f.submit 'Save', class: 'btn btn-success btn-lg' %>
+  </div>
+<% end %>
+</div>

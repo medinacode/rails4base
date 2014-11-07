@@ -56,7 +56,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     @<%= singular_table_name %> = <%= orm_class.build(class_name, "#{singular_table_name}_params") %>
     if request.xhr?
       if @<%= orm_instance.save %>
-        flash[:success] = '<%= human_name %> created'
+        flash[:success] = 'Create successful'
         render json: { success: true }
       else
         render json: { errors: @<%= singular_table_name %>.errors.full_messages }, :status => 422
@@ -81,7 +81,7 @@ class <%= controller_class_name %>Controller < ApplicationController
       end
     else
       if @<%= orm_instance.update("#{singular_table_name}_params") %>
-        flash[:success] = '<%= human_name %> updated'
+        flash[:success] = 'Update successful'
         redirect_to <%= plural_table_name %>_url
       else
         render :edit
@@ -91,17 +91,16 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   def destroy
     @<%= orm_instance.destroy %>
-    flash[:success] = '<%= human_name %> deleted'
+    flash[:success] = 'Delete successful'
     redirect_to :back
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_<%= singular_table_name %>
-  @<%= singular_table_name %> = <%= orm_class.find(class_name, "params[:id]") %>
-    end
+  def set_<%= singular_table_name %>
+    @<%= singular_table_name %> = <%= orm_class.find(class_name, "params[:id]") %>
+    @record = @<%= singular_table_name %>
+  end
 
-  # Only allow a trusted parameter "white list" through.
   def <%= "#{singular_table_name}_params" %>
   <%- if attributes_names.empty? -%>
     params[:<%= singular_table_name %>]

@@ -28,13 +28,11 @@ RSpec.describe <%= controller_class_name %>Controller, :type => :controller do
     before(:each) do
       @a = FactoryGirl.create(:<%= ns_file_name %>)
       @b = FactoryGirl.create(:<%= ns_file_name %>)
-      @c = FactoryGirl.create(:<%= ns_file_name %>)
-      @d = FactoryGirl.create(:<%= ns_file_name %>)
     end
 
     it 'assigns all <%= table_name.pluralize %>' do
       get :index
-      expect(assigns(:<%= ns_file_name %>s)).to match_array [@a, @b, @c, @d]
+      expect(assigns(:<%= ns_file_name %>s)).to include @a, @b
     end
 
     it 'renders the index template' do
