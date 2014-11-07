@@ -29,7 +29,6 @@ RSpec.describe LoginController, :type => :controller do
       post :do, { email_address: @user.email_address, password: nil }
       expect(response).to redirect_to login_path
     end
-
   end
 
 end

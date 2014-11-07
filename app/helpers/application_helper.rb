@@ -25,9 +25,6 @@ module ApplicationHelper
           when 'PresenceValidator'
             rules[:'rule-required'] = 'true'
             rules[:'msg-required'] = "#{field_label} is a required field"
-          when 'FormatValidator'
-            rules[:'rule-regex'] = v.options[:with].to_s.split(':').last[0..-2].sub!('\A', '').sub!('\Z', '')
-            rules[:'msg-regex'] = "#{field_label} has an invalid format"
         end
 
       end

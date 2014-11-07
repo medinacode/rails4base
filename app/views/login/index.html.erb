@@ -25,6 +25,11 @@
           } %>
         </div>
         <div class="button-row">
+          <div class="pull-left">
+            <ul class="list-unstyled">
+              <li>Don't have a login?<br><%= link_to "Get Instant Access", join_path, class: 'primary' %></li>
+            </ul>
+          </div>
           <%= submit_tag('Go', class: 'btn btn-success pull-right btn-lg') %>
         </div>
     <% end %>
