@@ -18,4 +18,23 @@ class LoginController < ApplicationController
     redirect_to login_path
   end
 
+  def join
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
+    @user.admin = false
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to :home
+    else
+      render :join
+    end
+  end
+
+  def user_params
+    params.require(:user).permit(:full_name, :nickname, :email_address, :password, :password_confirmation)
+  end
+
 end

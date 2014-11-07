@@ -1,0 +1,63 @@
+<div class="login clearfix col-md-7 col-md-offset-3 col-sm-8 col-sm-offset-2">
+  <div class="col-md-12">
+    <h2><span>Join</span></h2>
+    <% if @user.errors.any? %>
+        <div class="alert alert-danger">
+          <h4>Account creation failed</h4>
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <%= form_for(@user, :url => '', :html => { :class => 'validate clearfix form-horizontal' }) do |f| %>
+      <div class="form-group">
+        <%= f.label :full_name, :full_name.to_s.titleize, class: 'col-md-5' %>
+        <div class="col-md-7">
+          <%= f.text_field :full_name,
+                           :data => jquery_validation(User.validators_on(:full_name)),
+                           class: 'form-control input-lg' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :nickname, text_tip('What should we call you?', 'For example, when sending you an email'), class: 'col-md-5' %>
+        <div class="col-md-7">
+          <%= f.text_field :nickname,
+                           :data => jquery_validation(User.validators_on(:nickname)),
+                           class: 'form-control input-lg' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :email_address, :email_address.to_s.titleize, class: 'col-md-5' %>
+        <div class="col-md-7">
+          <%= f.text_field :email_address,
+                           :data => jquery_validation(User.validators_on(:email_address)),
+                           class: 'form-control input-lg' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :password, :password.to_s.titleize, class: 'col-md-5' unless action_name == 'edit' %>
+        <%= f.label :password, text_tip(:password.to_s.titleize, 'Enter a new password to change'), class: 'col-md-5' if action_name == 'edit' %>
+        <div class="col-md-7">
+          <%= f.password_field :password,
+                               :data => jquery_validation(User.validators_on(:password)),
+                               class: 'form-control input-lg' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation, 'Confirm Password', class: 'col-md-5' %>
+        <div class="col-md-7">
+          <%= f.password_field :password_confirmation,
+                               :data => { :'rule-equalTo' => '#user_password', :'msg-equalTo' => 'Password and confirm password must match' },
+                               class: 'form-control input-lg' %>
+        </div>
+      </div>
+      <div class="form-group button-row text-right">
+        <div class="col-md-12">
+            <%= f.submit 'Join', class: 'btn btn-success btn-lg' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
