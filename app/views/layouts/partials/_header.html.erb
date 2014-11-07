@@ -11,7 +11,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><%= link_to 'Edit Your Profile', edit_user_path(current_user), id: "edit_user_#{current_user.id}", data: { action: 'edit', controller: controller_name } %></li>
-              <li><%= link_to 'Your Account', current_user, id: "show_user_#{current_user.id}", data: { action: 'show', controller: controller_name } %></li>
+              <li><%= link_to 'Your Account', current_user %></li>
             </ul>
           </li>
         </ul>

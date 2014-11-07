@@ -92,15 +92,6 @@ feature 'Features: Logged in User Management' do
     expect(updated_user.full_name).to eq 'New Name'
   end
 
-  scenario 'shows a user (AJAX)', js: true do
-    visit home_path
-    find('a.dropdown-toggle').click
-    find("a#show_user_#{@user.id}").click
-    expect(page).to have_content 'Show User'
-    click_button 'Done'
-    expect(current_path).to eq '/home'
-  end
-
   scenario 'updates their information (AJAX)', js: true do
     visit home_path
     find('a.dropdown-toggle').click

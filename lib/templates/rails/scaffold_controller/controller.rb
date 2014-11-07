@@ -74,7 +74,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def update
     if request.xhr?
       if @<%= orm_instance.update("#{singular_table_name}_params") %>
-        flash[:success] = '<%= human_name %> updated'
+        flash[:success] = 'Update successful'
         render json: { success: true }
       else
         render json: { errors: @<%= singular_table_name %>.errors.full_messages }, :status => 422

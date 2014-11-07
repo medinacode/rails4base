@@ -79,7 +79,7 @@ class UsersController < ApplicationController
       end
     else
       if @user.update(user_params)
-        flash[:success] = 'User updated'
+        flash[:success] = 'Update successful'
         redirect_to current_user.admin? ? users_url : :home
       else
         render :edit
